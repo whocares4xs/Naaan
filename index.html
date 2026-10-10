@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAAAN</title>
+<meta name="description" content="All the music by NAAAN in one place: The Darkside Project, Scorpio Sun, Puras Babas and Quantum Artifact.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='black'/%3E%3Cpath d='M8 24V8l16 16V8' fill='none' stroke='%23a8e1ff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ice:#a8e1ff;
+  --ice-hi:#e4f6ff;
+  --ice-mid:#6fb7dc;
+  --text:#d5e6f1;
+  --muted:#8ba6b8;
+  --line:rgba(168,225,255,.18);
+  --glow:rgba(168,225,255,.38);
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#000;color:var(--text);font-family:"Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif;font-weight:400;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,p,ol,ul{margin:0}
+a{color:var(--ice);text-underline-offset:.25em}
+a:hover{color:var(--ice-hi)}
+:focus-visible{outline:2px solid var(--ice);outline-offset:4px}
+::selection{background:var(--ice);color:#000}
+img,svg{display:block}
+.skip{position:fixed;left:16px;top:-60px;z-index:100;background:var(--ice);color:#000;padding:10px 16px;text-decoration:none;transition:top .2s}
+.skip:focus{top:16px}
+
+/* Header */
+.bar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4.5vw,72px) 34px;background:linear-gradient(#000 25%,rgba(0,0,0,0))}
+.brand{color:var(--ice-hi);text-decoration:none;font-weight:300;letter-spacing:.42em;font-size:16px}
+.bar nav{display:flex;gap:clamp(22px,3.5vw,48px)}
+.bar nav a{position:relative;color:var(--muted);text-decoration:none;letter-spacing:.06em;padding:6px 0;transition:color .3s}
+.bar nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease)}
+.bar nav a:hover,.bar nav a[aria-current=page]{color:var(--ice-hi)}
+.bar nav a:hover::after,.bar nav a[aria-current=page]::after{transform:none}
+
+/* Stage and transitions */
+#stage{min-height:100vh;outline:none}
+#stage.leaving{opacity:0;transition:opacity .2s ease}
+#stage.enter{animation:wipe .85s var(--ease) both}
+#scan{position:fixed;top:0;bottom:0;left:0;width:1px;z-index:60;opacity:0;pointer-events:none;background:linear-gradient(transparent,var(--ice) 14%,var(--ice) 86%,transparent);box-shadow:0 0 22px 3px var(--glow)}
+#scan.go{animation:scan .85s var(--ease) both}
+@keyframes wipe{from{clip-path:inset(-80px 100% -80px 0)}to{clip-path:inset(-80px 0 -80px 0)}}
+@keyframes scan{0%{left:0;opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
+@keyframes rise{to{transform:none}}
+@keyframes up{from{opacity:1;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(-80px)}}
+@keyframes fade{to{opacity:1}}
+@keyframes drop{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0)}}
+
+.mask{display:block;overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em}
+.mask>span{display:block;transform:translateY(112%);animation:rise 1.1s var(--ease) .3s forwards}
+.ri{opacity:0}
+
+/* Collage */
+.collage-section{padding:clamp(40px,8vw,90px) clamp(20px,4.5vw,72px) clamp(70px,10vw,120px)}
+.collage{display:flex;gap:clamp(10px,1.6vw,18px);max-width:1180px;margin:0 auto;align-items:stretch}
+.collage a{position:relative;flex:1 1 0;display:block;overflow:hidden;border-radius:2px;background:#050505;aspect-ratio:3/4;opacity:1;animation:fade .9s var(--ease) calc(var(--i,0)*.12s + .15s) both}
+.collage a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.45));opacity:0;transition:opacity .5s var(--ease)}
+.collage a:hover::after{opacity:1}
+.collage img{width:100%;height:100%;object-fit:contain;object-position:center;filter:grayscale(.15) contrast(1.05);transition:transform 1.1s var(--ease),filter .6s}
+.collage a:hover img{transform:scale(1.035);filter:grayscale(0) contrast(1.08)}
+.collage a:focus-visible img{transform:scale(1.035)}
+.collage a::before{content:"";position:absolute;inset:0;border:1px solid var(--line);z-index:1;pointer-events:none}
+@media (max-width:760px){
+  .collage{flex-direction:column}
+  .collage a{aspect-ratio:3/4}
+}
+.ri.in{animation:up 1s var(--ease) calc(var(--i,0)*.07s + var(--base,.3s)) both}
+
+/* Layout helpers */
+.wrap{padding:0 clamp(20px,4.5vw,72px);max-width:1560px;margin:0 auto}
+.view{padding-top:clamp(120px,17vh,170px);padding-bottom:120px}
+.block{padding-top:clamp(80px,12vw,160px)}
+.page{font-weight:200;font-size:clamp(46px,8.5vw,130px);line-height:1;letter-spacing:.02em;color:var(--ice-hi)}
+.h2{font-weight:200;font-size:clamp(30px,4.2vw,56px);line-height:1.1;letter-spacing:.02em;color:var(--ice-hi)}
+.lead{font-size:clamp(20px,2.2vw,28px);font-weight:300;line-height:1.5;max-width:34em;color:var(--ice-hi)}
+.muted{color:var(--muted)}
+.hint{color:var(--muted);font-size:15px}
+
+/* Buttons */
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:.7em;padding:14px 26px;border:1px solid var(--ice);color:var(--ice-hi);background:transparent;font:inherit;font-weight:400;letter-spacing:.06em;text-decoration:none;cursor:pointer;transition:color .4s var(--ease),box-shadow .5s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;background:var(--ice);transform:translateX(-101%);transition:transform .55s var(--ease);z-index:-1}
+.btn:hover,.btn:focus-visible{color:#000;box-shadow:0 0 32px var(--glow)}
+.btn:hover::before,.btn:focus-visible::before{transform:none}
+.btn.ghost{border-color:var(--line);color:var(--text)}
+.btn:disabled{opacity:.5;cursor:default}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+
+/* Cover art */
+.art{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background:#000;outline:1px solid var(--line);outline-offset:0;transition:outline-color .4s,box-shadow .6s var(--ease)}
+.art img,.art svg{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+
+/* Hero */
+@keyframes photofade{to{opacity:1}}
+.photo-section{display:flex;justify-content:center;padding:clamp(20px,4vw,40px) clamp(20px,4.5vw,72px)}
+.photo-section img{max-width:100%;max-height:85vh;width:auto;height:auto;object-fit:contain;border:1px solid var(--line);border-radius:2px}
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:radial-gradient(60% 46% at 50% 48%,rgba(168,225,255,.08),transparent 72%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(20px,3.6vh,38px);padding:80px 20px 40px}
+.wordmark{font-weight:200;font-size:clamp(52px,19vw,300px);line-height:1;letter-spacing:.09em;padding-left:.09em;color:var(--ice-hi);filter:drop-shadow(0 0 26px rgba(168,225,255,.3))}
+.ch{display:inline-block;overflow:hidden;padding:.04em 0 .09em}
+.ch>span{display:inline-block}
+.intro .ch>span{transform:translateY(112%);animation:rise 1.2s var(--ease) calc(.15s + var(--i)*.09s) forwards}
+.tagline{max-width:32em;color:var(--muted);font-size:clamp(16px,1.6vw,19px);font-weight:300}
+.intro .tagline,.intro .hero-inner .btn{opacity:0;animation:fade 1.2s ease 1.7s forwards}
+
+/* Latest release */
+.latest-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,6vw,96px);align-items:center;margin-top:44px}
+.latest-info h3{font-weight:200;font-size:clamp(34px,4.6vw,64px);line-height:1.05;color:var(--ice-hi)}
+.latest-info p{margin-top:12px}
+.latest-info .art-link:hover .art,.latest-grid>a.art:hover{outline-color:var(--ice);box-shadow:0 0 60px -8px var(--glow)}
+.latest-grid>a.art:hover img{transform:scale(1.04)}
+
+/* Projects list */
+.projects{margin-top:40px;border-top:1px solid var(--line)}
+.proj{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,2fr) minmax(0,5fr);gap:10px 32px;align-items:baseline;padding:32px 0;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;transition:padding .6s var(--ease),background .5s}
+.proj:hover,.proj:focus-visible{padding-left:20px;background:linear-gradient(90deg,rgba(168,225,255,.08),transparent 65%)}
+.proj-name{font-size:clamp(28px,3.8vw,52px);font-weight:200;letter-spacing:.02em;line-height:1.1;color:var(--ice-hi)}
+.proj-years{color:var(--ice-mid);font-variant-numeric:tabular-nums}
+.proj-desc span{display:block;color:var(--muted);font-size:16px}
+
+/* Music grid */
+.filters{display:flex;flex-wrap:wrap;gap:6px 30px;margin-top:40px}
+.filters button{position:relative;background:none;border:0;padding:8px 0;color:var(--muted);font:inherit;letter-spacing:.05em;cursor:pointer;transition:color .3s}
+.filters button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ice);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease)}
+.filters button:hover,.filters button[aria-pressed=true]{color:var(--ice-hi)}
+.filters button:hover::after,.filters button[aria-pressed=true]::after{transform:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:60px 34px;margin-top:52px}
+.tile{display:block;color:inherit;text-decoration:none}
+.tile:hover .art,.tile:focus-visible .art{outline-color:var(--ice);box-shadow:0 0 50px -8px var(--glow)}
+.tile:hover .art img,.tile:hover .art svg{transform:scale(1.045)}
+.tile h3{font-weight:300;font-size:25px;line-height:1.2;letter-spacing:.02em;margin:20px 0 4px;color:var(--ice-hi)}
+.tile p{color:var(--muted);font-size:15px}
+
+/* Release page */
+.back{display:inline-block;margin-bottom:34px;color:var(--muted);text-decoration:none;letter-spacing:.05em}
+.back:hover{color:var(--ice-hi)}
+.rel-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,100px);align-items:start}
+.rel-art{position:sticky;top:110px}
+.rel-info .page{font-size:clamp(40px,6vw,88px)}
+.rel-meta{margin-top:22px;display:grid;gap:2px}
+.rel-meta a{color:var(--ice-hi);font-size:22px;font-weight:300;text-decoration:none;letter-spacing:.02em}
+.rel-meta a:hover{color:var(--ice)}
+.rel-note{margin-top:22px;max-width:36em;color:var(--text);font-weight:300;font-size:18px}
+.player{display:block;width:100%;height:120px;border:0;margin-top:34px;background:transparent;color-scheme:dark}
+.tracks{list-style:none;padding:0;margin-top:30px;counter-reset:t;border-top:1px solid var(--line)}
+.tracks li{display:grid;grid-template-columns:2.4em 1fr;padding:15px 0;border-bottom:1px solid var(--line);counter-increment:t;font-weight:300;font-size:19px;color:var(--ice-hi)}
+.tracks li::before{content:counter(t,decimal-leading-zero);color:var(--ice-mid);font-variant-numeric:tabular-nums}
+.tracks.compact li{font-size:17px;padding:11px 0}
+
+/* Comments */
+.comments{margin-top:clamp(70px,10vw,150px);max-width:800px}
+.comments form{margin-top:34px}
+.field{display:grid;gap:6px;margin-bottom:22px}
+.field label{color:var(--muted);font-size:15px;letter-spacing:.04em}
+.field input,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;color:var(--ice-hi);font:inherit;font-weight:300;font-size:19px;padding:10px 0;transition:border-color .3s,box-shadow .3s}
+.field textarea{min-height:120px;resize:vertical;line-height:1.5}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ice);box-shadow:0 1px 0 0 var(--ice)}
+.form-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+#cstatus{color:var(--ice);min-height:1.6em}
+#clist{margin-top:44px;border-top:1px solid var(--line)}
+.c{padding:24px 0;border-bottom:1px solid var(--line)}
+.c.fresh{animation:drop .9s var(--ease) both}
+.c-head{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline}
+.c-name{color:var(--ice-hi);font-weight:500}
+.c-date{color:var(--muted);font-size:14px}
+.c p{margin-top:8px;font-weight:300;white-space:pre-wrap;overflow-wrap:anywhere}
+.empty{padding:26px 0;color:var(--muted)}
+
+/* About */
+.about-copy{display:grid;gap:26px;margin-top:44px}
+.about-copy p:not(.lead){max-width:36em;color:var(--muted);font-size:18px;font-weight:300}
+.about-projects{margin-top:clamp(70px,10vw,140px)}
+
+/* Footer */
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-top:clamp(90px,12vw,170px);padding-bottom:44px;color:var(--muted);font-size:15px}
+.foot span:first-child{letter-spacing:.42em;color:var(--ice-hi);font-weight:300}
+
+@media (max-width:860px){
+  .latest-grid,.rel-grid{grid-template-columns:1fr}
+  .rel-art{position:static}
+  .proj{grid-template-columns:1fr;gap:4px;padding:26px 0}
+  .proj:hover{padding-left:12px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wordmark{font-size:20vw}
+  .brand{letter-spacing:.32em;font-size:14px}
+  .grid{gap:48px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}
+  .ri{opacity:1!important;clip-path:none!important}
+  #scan{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#stage">Skip to content</a>
+<header class="bar">
+  <a class="brand" href="#/">NAAAN</a>
+  <nav aria-label="Main">
+    <a href="#/music" data-nav="music">Music</a>
+    <a href="#/about" data-nav="about">About</a>
+  </nav>
+</header>
+<main id="stage" tabindex="-1"></main>
+<div id="scan" aria-hidden="true"></div>
+<script>
+/* ============================================================
+   CONTENT â edit this section to add music.
+   Add a project to PROJECTS, then add a release to RELEASES.
+   Newest releases go first.
+   ============================================================ */
+const PROJECTS = [
+  { id:'quantum-artifact', name:'Quantum Artifact', years:'2026', genre:'Punk, progressive, industrial, metal', role:'6-string bass, bass, drum programming' },
+  { id:'puras-babas', name:'Puras Babas', years:'2026', genre:'Punk en espaÃ±ol', role:'Guitar, bass, drums, vocals' },
+  { id:'scorpio-sun', name:'Scorpio Sun', years:'2012â2016', genre:'Progressive metal', role:'Guitar' },
+  { id:'darkside-project', name:'The Darkside Project', years:'2005â2010', genre:'Punk, metal, electronic', role:'Main composer, guitar, vocals, synth' }
+];
+
+const RELEASES = [
+  {
+    id:'quantum-artifact-singles', title:'Singles', project:'quantum-artifact', year:'2026',
+    when:'Released 20 September 2026', type:'Pre-release singles', seed:1,
+    cover:'https://f4.bcbits.com/img/a3785407216_5.jpg',
+    bcId:102500890, url:'https://quantumartifact.bandcamp.com/album/singles',
+    tracks:['Small Brains, Big Business','Acid Clown Meltdown','The Grand Unification'],
+    note:'Pre-release versions of tunes that will be officially re-released later. More music is on the way.'
+  },
+  {
+    id:'liberame', title:'LibÃ©rame', project:'puras-babas', year:'2026',
+    when:'Released 10 February 2026', type:'Single', seed:2,
+    cover:'https://f4.bcbits.com/img/a2692256492_5.jpg',
+    bcId:3180473606, bcType:'track', url:'https://purasbabas.bandcamp.com/track/lib-rame',
+    tracks:['LibÃ©rame'],
+    note:'Punk en espaÃ±ol.'
+  },
+  {
+    id:'moving-forward', title:'Moving Forward', project:'scorpio-sun', year:'2016',
+    when:'Released 23 September 2016', type:'Single', seed:3,
+    cover:'https://f4.bcbits.com/img/a0911571827_5.jpg',
+    bcId:2106577940, url:'https://scorpiosun.bandcamp.com/album/moving-forward-single',
+    tracks:['Moving Forward'], note:''
+  },
+  {
+    id:'infinite-moment', title:'Infinite Moment', project:'scorpio-sun', year:'2015',
+    when:'Released 26 October 2015', type:'Album', seed:4,
+    cover:'https://f4.bcbits.com/img/a3361704530_5.jpg',
+    bcId:2518672587, url:'https://scorpiosun.bandcamp.com/album/infinite-moment', free:true,
+    tracks:['The Recluse','Letting Go','Illusion of Self','Reintroduction','Polarity Integration','Universe of Formless Vibrations'],
+    note:'The first Scorpio Sun album. Free to download: enter $0 when Bandcamp asks you to name your price.'
+  },
+  {
+    id:'d-construction', title:'D-construction', project:'darkside-project', year:'2005â2010',
+    when:'From 2005â2010', type:'Album', seed:5, cover:'', trackCount:11,
+    ext:'https://dddride.wixsite.com/thedarksideproject', extLabel:'Listen on the original site',
+    tracks:[], note:'The second Darkside Project album. All 11 tracks play in the player on the original site. Track titles and artwork are coming soon.'
+  },
+  {
+    id:'demo-lition', title:'Demo-lition', project:'darkside-project', year:'2005â2010',
+    when:'From 2005â2010', type:'Album', seed:6, cover:'', trackCount:15,
+    ext:'https://dddride.wixsite.com/thedarksideproject', extLabel:'Listen on the original site',
+    tracks:[], note:'The first Darkside Project album. All 15 tracks play in the player on the original site. Track titles and artwork are coming soon.'
+  }
+];
+
+/* ============================================================
+   Helpers
+   ============================================================ */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const proj = id => PROJECTS.find(p => p.id === id);
+const stage = $('#stage');
+const scan = $('#scan');
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+const ICON_DL = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M8 2v9m0 0L4.5 7.5M8 11l3.5-3.5M2.5 14h11"/></svg>';
+
+/* Generated cover for releases without artwork */
+function waveSVG(seed){
+  let paths = '';
+  for (let i = 0; i < 6; i++){
+    const amp = 8 + ((seed * 7 + i * 13) % 34);
+    const freq = 1 + ((seed + i * 3) % 4);
+    const y0 = 70 + i * 32 + ((seed * 11) % 18);
+    let d = 'M0 ' + y0;
+    for (let x = 0; x <= 300; x += 5){
+      d += ' L' + x + ' ' + (y0 + Math.sin(x / 300 * Math.PI * 2 * freq + seed + i) * amp).toFixed(1);
+    }
+    paths += `<path d="${d}" fill="none" stroke="#a8e1ff" stroke-opacity="${(0.8 - i * 0.11).toFixed(2)}" stroke-width="1"/>`;
+  }
+  return `<svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Artwork coming soon"><defs><radialGradient id="g${seed}" cx="50%" cy="60%" r="70%"><stop offset="0" stop-color="#a8e1ff" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs><rect width="300" height="300" fill="#000"/><rect width="300" height="300" fill="url(#g${seed})"/>${paths}</svg>`;
+}
+function coverHTML(r){
+  if (r.cover) return `<img src="${esc(r.cover)}" alt="${esc(r.title)} cover art" decoding="async" data-seed="${r.seed}">`;
+  return waveSVG(r.seed);
+}
+/* If a cover image fails to load, swap in the generated one */
+document.addEventListener('error', e => {
+  const t = e.target;
+  if (t && t.tagName === 'IMG' && t.dataset.seed){
+    t.insertAdjacentHTML('afterend', waveSVG(Number(t.dataset.seed)));
+    t.remove();
+  }
+}, true);
+
+/* ============================================================
+   Views
+   ============================================================ */
+const projRow = (p, i) => `
+  <a class="proj ri" style="--i:${i}" href="#/music?p=${p.id}">
+    <span class="proj-name">${esc(p.name)}</span>
+    <span class="proj-years">${esc(p.years)}</span>
+    <span class="proj-desc"><span>${esc(p.genre)}</span><span>Role: ${esc(p.role)}</span></span>
+  </a>`;
+
+const tile = (r, i) => `
+  <a class="tile ri" style="--i:${i}" href="#/music/${r.id}">
+    <div class="art">${coverHTML(r)}</div>
+    <h3>${esc(r.title)}</h3>
+    <p>${esc(proj(r.project).name)}, ${esc(r.year)}</p>
+  </a>`;
+
+let introSeen = false;
+
+function homeView(){
+  const l = RELEASES.find(r => r.bcId);
+  const letters = [...'NAAAN'].map((c, i) => `<span class="ch" aria-hidden="true"><span style="--i:${i}">${c}</span></span>`).join('');
+  return `
+  <section class="hero ${introSeen ? '' : 'intro'}" id="hero">
+    <canvas id="wave" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <h1 class="wordmark" aria-label="NAAAN">${letters}</h1>
+      <p class="tagline">Punk rock, progressive metal, techno, industrial rock, experimental, black metal and alt rock.</p>
+      <a class="btn" href="#/music">Browse music</a>
+    </div>
+  </section>
+
+  <section class="photo-section wrap">
+    <img class="ri" src="photo1.jpg" alt="NAAAN playing guitar" loading="lazy">
+  </section>
+
+  <section class="wrap block">
+    <h2 class="h2 ri">Latest music</h2>
+    <div class="latest-grid">
+      <a class="art ri" href="#/music/${l.id}" aria-label="Open ${esc(l.title)}">${coverHTML(l)}</a>
+      <div class="latest-info ri" style="--i:2">
+        <h3>${esc(l.title)}</h3>
+        <p class="muted">${esc(proj(l.project).name)}, ${esc(l.when.replace('Released ',''))}</p>
+        <p class="rel-note">${esc(l.note)}</p>
+        <ol class="tracks compact">${l.tracks.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
+        <div class="actions">
+          <a class="btn" href="#/music/${l.id}">Listen</a>
+          <a class="btn ghost" href="${esc(l.url)}" target="_blank" rel="noopener">${ICON_DL}Get on Bandcamp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap block">
+    <h2 class="h2 ri">Projects</h2>
+    <div class="projects">${PROJECTS.map(projRow).join('')}</div>
+  </section>
+
+  <footer class="foot wrap"><span>NAAAN</span><span>Music streams from Bandcamp.</span></footer>`;
+}
+
+function gridHTML(filter){
+  const list = RELEASES.filter(r => filter === 'all' || r.project === filter);
+  if (!list.length) return '<p class="empty">No music in this project yet.</p>';
+  return list.map(tile).join('');
+}
+
+function musicView(params){
+  let active = params.get('p') || 'all';
+  if (active !== 'all' && !proj(active)) active = 'all';
+  const btn = (id, label) => `<button type="button" data-filter="${id}" aria-pressed="${id === active}">${esc(label)}</button>`;
+  return `
+  <section class="wrap view">
+    <h1 class="page mask"><span>Music</span></h1>
+    <div class="filters" role="group" aria-label="Filter by project">
+      ${btn('all','All')}${PROJECTS.map(p => btn(p.id, p.name)).join('')}
+    </div>
+    <div class="grid" id="grid">${gridHTML(active)}</div>
+  </section>
+
+  <section class="photo-section wrap">
+    <img class="ri" src="photo3.jpg" alt="NAAAN performing" loading="lazy">
+  </section>
+
+  <footer class="foot wrap"><span>NAAAN</span><span>Music streams from Bandcamp.</span></footer>`;
+}
+
+function releaseView(r){
+  const p = proj(r.project);
+  const n = r.tracks.length || r.trackCount || 0;
+  const count = n ? `${n} ${n === 1 ? 'track' : 'tracks'}` : '';
+  let actions = '';
+  if (r.url) actions += `<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener">${ICON_DL}${r.free ? 'Download free on Bandcamp' : 'Get on Bandcamp'}</a>`;
+  if (r.ext) actions += `<a class="btn" href="${esc(r.ext)}" target="_blank" rel="noopener">${esc(r.extLabel)}</a>`;
+  const player = r.bcId ? `
+    <iframe class="player" title="Play ${esc(r.title)} on Bandcamp" loading="lazy" seamless
+      src="https://bandcamp.com/EmbeddedPlayer/${r.bcType || 'album'}=${r.bcId}/size=large/bgcol=000000/linkcol=a8e1ff/tracklist=false/artwork=small/transparent=true/"></iframe>
+    <p class="hint">Player not loading? <a href="${esc(r.url)}" target="_blank" rel="noopener">Open it on Bandcamp</a>.</p>` : '';
+  return `
+  <article class="wrap view">
+    <a class="back" href="#/music">All music</a>
+    <div class="rel-grid">
+      <div class="rel-art"><div class="art">${coverHTML(r)}</div></div>
+      <div class="rel-info">
+        <h1 class="page mask"><span>${esc(r.title)}</span></h1>
+        <div class="rel-meta">
+          <a href="#/music?p=${p.id}">${esc(p.name)}</a>
+          <span class="muted">${esc(r.when)}${count ? ', ' + count : ''}</span>
+          <span class="muted">Role: ${esc(p.role)}</span>
+        </div>
+        ${r.note ? `<p class="rel-note">${esc(r.note)}</p>` : ''}
+        ${actions ? `<div class="actions">${actions}</div>` : ''}
+        ${player}
+        ${r.tracks.length ? `<ol class="tracks">${r.tracks.map(t => `<li>${esc(t)}</li>`).join('')}</ol>` : ''}
+      </div>
+    </div>
+
+    <section class="comments" aria-labelledby="ctitle">
+      <h2 class="h2" id="ctitle">Comments</h2>
+      <form id="cform" novalidate>
+        <div class="field"><label for="cname">Name (optional)</label><input id="cname" type="text" maxlength="40" autocomplete="nickname"></div>
+        <div class="field"><label for="ctext">Comment</label><textarea id="ctext" maxlength="500" required></textarea></div>
+        <div class="form-row">
+          <button class="btn" type="submit" id="cbtn">Post comment</button>
+          <p id="cstatus" role="status" aria-live="polite"></p>
+        </div>
+        <p class="hint" style="margin-top:16px">Comments are public and visible to everyone.</p>
+      </form>
+      <div id="clist" aria-live="polite"></div>
+    </section>
+  </article>
+  <footer class="foot wrap"><span>NAAAN</span><span>Music streams from Bandcamp.</span></footer>`;
+}
+
+function aboutView(){
+  return `
+  <section class="wrap view">
+    <h1 class="page mask"><span>About</span></h1>
+    <div class="about-copy">
+      <p class="lead ri">NAAAN is a composer and multi-instrumentalist working across punk rock, progressive metal, techno, industrial rock, experimental music, black metal and alt rock.</p>
+      <p class="ri" style="--i:1">This site brings the music from every project together in one place, so you can listen, download and leave a comment on any release.</p>
+    </div>
+
+    <section class="photo-section">
+      <img class="ri" src="photo2.jpg" alt="NAAAN portrait" loading="lazy">
+    </section>
+    <div class="about-projects">
+      <h2 class="h2 ri">Projects</h2>
+      <div class="projects">${PROJECTS.map(projRow).join('')}</div>
+    </div>
+  </section>
+  <footer class="foot wrap"><span>NAAAN</span><span>Music streams from Bandcamp.</span></footer>`;
+}
+
+function notFoundView(){
+  return `<section class="wrap view"><h1 class="page mask"><span>Not found</span></h1>
+  <p class="lead" style="margin-top:32px">That page doesnât exist. Try the <a href="#/music">music page</a>.</p></section>`;
+}
+
+/* ============================================================
+   Comments (shared storage in the preview; swap for a database
+   such as Supabase or Firebase when you host the site)
+   ============================================================ */
+const memory = {};
+async function loadComments(id){
+  try {
+    const r = await window.storage.get('comments:' + id, true);
+    return r && r.value ? JSON.parse(r.value) : [];
+  } catch (e) {
+    return memory[id] || [];
+  }
+}
+async function addComment(id, c){
+  const list = await loadComments(id);
+  list.push(c);
+  try {
+    const r = await window.storage.set('comments:' + id, JSON.stringify(list), true);
+    if (!r) throw new Error('not saved');
+  } catch (e) {
+    memory[id] = list;
+  }
+  return list;
+}
+const fmtDate = t => new Date(t).toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+
+async function initComments(id){
+  const list = $('#clist'), form = $('#cform'), status = $('#cstatus'), btn = $('#cbtn');
+  if (!list || !form) return;
+  const draw = (items, fresh) => {
+    if (!items.length){ list.innerHTML = '<p class="empty">No comments yet. Be the first to write one.</p>'; return; }
+    list.innerHTML = items.slice().reverse().map((c, i) => `
+      <article class="c${fresh && i === 0 ? ' fresh' : ''}">
+        <div class="c-head"><span class="c-name">${esc(c.name)}</span><time class="c-date" datetime="${new Date(c.t).toISOString()}">${esc(fmtDate(c.t))}</time></div>
+        <p>${esc(c.text)}</p>
+      </article>`).join('');
+  };
+  draw(await loadComments(id), false);
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const nameEl = form.elements['cname'], textEl = form.elements['ctext'];
+    const text = textEl.value.trim();
+    const name = nameEl.value.trim().slice(0, 40) || 'Anonymous';
+    if (!text){ status.textContent = 'Write a comment before posting.'; textEl.focus(); return; }
+    btn.disabled = true;
+    status.textContent = '';
+    const items = await addComment(id, { name, text: text.slice(0, 500), t: Date.now() });
+    draw(items, true);
+    textEl.value = '';
+    status.textContent = 'Comment posted.';
+    btn.disabled = false;
+  });
+}
+
+/* ============================================================
+   Hero waveform
+   ============================================================ */
+let heroStop = null;
+function stopHero(){ if (heroStop){ heroStop(); heroStop = null; } }
+
+function startHero(){
+  const hero = $('#hero'), cv = $('#wave');
+  if (!hero || !cv) return;
+  const ctx = cv.getContext('2d');
+  const wm = $('.wordmark', hero);
+  const intro = hero.classList.contains('intro');
+  const layers = [
+    { f:1.5, s:.0006,  a:.11, al:.95, w:1.6, j:1.6 },
+    { f:2.6, s:-.0009, a:.07, al:.5,  w:1,   j:1 },
+    { f:4.2, s:.0012,  a:.04, al:.3,  w:1,   j:.6 }
+  ];
+  let W = 0, H = 0, raf = 0, visible = true;
+  let mx = -1e5, mAct = 0, mTarget = 0;
+  const t0 = performance.now();
+  const delay = intro ? 900 : 150, dur = intro ? 2200 : 1200;
+
+  function size(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = hero.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function draw(t, progress){
+    const hr = hero.getBoundingClientRect(), wr = wm.getBoundingClientRect();
+    const cy = wr.top - hr.top + wr.height / 2;
+    ctx.clearRect(0, 0, W, H);
+    const limit = W * progress;
+    ctx.lineJoin = 'round';
+    for (const L of layers){
+      ctx.beginPath();
+      for (let x = 0; x <= limit; x += 3){
+        const nx = x / W;
+        const env = Math.pow(Math.sin(Math.PI * nx), .9);
+        const boost = 1 + 2.2 * mAct * Math.exp(-Math.pow(x - mx, 2) / (2 * Math.pow(W * .1, 2)));
+        const y = cy + Math.sin(nx * L.f * Math.PI * 2 + t * L.s) * L.a * H * env * boost
+                     + Math.sin(nx * 160 + t * .006) * L.j * env;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(168,225,255,${L.al})`;
+      ctx.lineWidth = L.w;
+      ctx.shadowColor = 'rgba(168,225,255,.85)';
+      ctx.shadowBlur = L.w > 1.2 ? 14 : 6;
+      ctx.stroke();
+    }
+  }
+  function frame(now){
+    raf = requestAnimationFrame(frame);
+    if (!visible) return;
+    const t = now - t0;
+    mAct += (mTarget - mAct) * .06;
+    const p = Math.min(1, Math.max(0, (t - delay) / dur));
+    draw(t, 1 - Math.pow(1 - p, 3));
+  }
+  const onMove = e => { const r = hero.getBoundingClientRect(); mx = e.clientX - r.left; mTarget = 1; };
+  const onLeave = () => { mTarget = 0; };
+  const onResize = () => { size(); if (reduced) draw(2000, 1); };
+
+  size();
+  window.addEventListener('resize', onResize);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(onResize);
+  if (reduced){
+    draw(2000, 1);
+  } else {
+    hero.addEventListener('pointermove', onMove);
+    hero.addEventListener('pointerleave', onLeave);
+    raf = requestAnimationFrame(frame);
+  }
+  let io = null;
+  if ('IntersectionObserver' in window){
+    io = new IntersectionObserver(es => { visible = es[0].isIntersecting; });
+    io.observe(hero);
+  }
+  heroStop = () => {
+    cancelAnimationFrame(raf);
+    window.removeEventListener('resize', onResize);
+    hero.removeEventListener('pointermove', onMove);
+    hero.removeEventListener('pointerleave', onLeave);
+    if (io) io.disconnect();
+  };
+}
+
+/* ============================================================
+   Reveals, routing and page transitions
+   ============================================================ */
+let io = null, mountedAt = 0;
+function observeReveals(){
+  if (io) io.disconnect();
+  const items = $$('.ri', stage);
+  if (!('IntersectionObserver' in window)){ items.forEach(i => i.classList.add('in')); return; }
+  io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      if (performance.now() - mountedAt > 1000) e.target.style.setProperty('--base', '0s');
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin:'0px 0px -6% 0px', threshold:.05 });
+  items.forEach(i => io.observe(i));
+}
+
+function parseHash(){
+  const raw = location.hash.replace(/^#/, '') || '/';
+  const [path, query] = raw.split('?');
+  return { parts: path.split('/').filter(Boolean), params: new URLSearchParams(query || '') };
+}
+
+function mount(){
+  const { parts, params } = parseHash();
+  stopHero();
+  let html, title = 'NAAAN', nav = '', post = null;
+  if (!parts.length){
+    html = homeView();
+    post = startHero;
+  } else if (parts[0] === 'music' && parts[1]){
+    const r = RELEASES.find(x => x.id === parts[1]);
+    nav = 'music';
+    if (r){ html = releaseView(r); title = `${r.title} by ${proj(r.project).name} | NAAAN`; post = () => initComments(r.id); }
+    else html = notFoundView();
+  } else if (parts[0] === 'music'){
+    html = musicView(params); nav = 'music'; title = 'Music | NAAAN';
+  } else if (parts[0] === 'about'){
+    html = aboutView(); nav = 'about'; title = 'About | NAAAN';
+  } else {
+    html = notFoundView();
+  }
+  stage.innerHTML = html;
+  mountedAt = performance.now();
+  $$('.bar nav a').forEach(a => {
+    if (a.dataset.nav === nav) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  document.title = title;
+  window.scrollTo(0, 0);
+  observeReveals();
+  if (post) post();
+  stage.focus({ preventScroll:true });
+  return !parts.length;
+}
+
+function play(){
+  stage.classList.remove('enter');
+  scan.classList.remove('go');
+  void stage.offsetWidth;
+  stage.classList.add('enter');
+  scan.classList.add('go');
+}
+stage.addEventListener('animationend', e => {
+  if (e.target === stage && e.animationName === 'wipe') stage.classList.remove('enter');
+  if (e.target === scan) scan.classList.remove('go');
+});
+scan.addEventListener('animationend', () => scan.classList.remove('go'));
+
+let first = true, timer = 0;
+function route(){
+  clearTimeout(timer);
+  if (first){
+    first = false;
+    const isHome = mount();
+    if (isHome) introSeen = true; else play();
+    return;
+  }
+  stage.classList.add('leaving');
+  timer = setTimeout(() => {
+    const isHome = mount();
+    if (isHome) introSeen = true;
+    stage.classList.remove('leaving');
+    play();
+  }, reduced ? 0 : 200);
+}
+window.addEventListener('hashchange', route);
+
+/* Music filters update the grid in place */
+stage.addEventListener('click', e => {
+  const b = e.target.closest('[data-filter]');
+  if (!b) return;
+  const f = b.dataset.filter;
+  $$('[data-filter]', stage).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  history.replaceState(null, '', f === 'all' ? '#/music' : '#/music?p=' + f);
+  $('#grid').innerHTML = gridHTML(f);
+  mountedAt = performance.now();
+  observeReveals();
+});
+
+route();
+</script>
+</body>
+</html>
