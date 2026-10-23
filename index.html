@@ -78,6 +78,8 @@ button{font-family:inherit;cursor:pointer;background:none;border:none;color:inhe
 .hero-sub .tag{color:var(--ice)}
 .hero-art{display:flex;justify-content:center;align-items:center;margin:clamp(2vh,2vh,2vh) 0}
 .hero-art img{max-width:min(50px,50px);max-height:50px;width:auto;height:auto;border:1px solid var(--line);filter:saturate(.92) contrast(1.04)}
+.video-container{width:100%;max-width:900px;margin:0 auto;display:flex;justify-content:center;align-items:center}
+.video-container iframe{width:100%;aspect-ratio:1/1; height:auto;border:none}
 
 /* ============ SECTION SHELL ============ */
 section{padding:clamp(80px,12vh,140px) 0}
@@ -243,9 +245,10 @@ footer{padding:clamp(60px,9vh,100px) 0 40px;border-top:1px solid var(--line)}
   <div class="hero-logo rv" style="--d:.1s">
     <img src="photo5.png" alt="NAAAN" loading="eager">
   </div>
-<div> <h1 class="sec-title"><span class="lm"><span>COMING SOON...</span></span> </h1></div>
-  <div class="hero-art rv" style="--d:.3s">
-<video src="photo4.mp4" autoplay muted loop playsinline aria-label="NAAAN upcoming album promo"></video>
+<div><h2 class="sec-title"><span class="lm"><span>Coming Soon...</span></span></h2>
+      </div>
+  <div class="video-container">
+<iframe src="photo4.mp4" autoplay muted loop playsinline aria-label="NAAAN upcoming album promo" frameborder="0" allowfullscreen></iframe>
 </div>
 
   <div class="hero-sub">
