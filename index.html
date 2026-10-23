@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NAAAN — Punk, Progressive &amp; Industrial Music</title>
+<title>NAAAN — Punk, Progressive & Industrial Music</title>
 <meta name="description" content="All the music by NAAAN in one place: The Darkside Project, Scorpio Sun, Puras Babas and Quantum Artifact.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d11'/%3E%3Cpath d='M8 24V8l16 16V8' fill='none' stroke='%23ff5a2e' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,28 +12,27 @@
 <style>
 /* ============ TOKENS ============ */
 :root{
-  --ink:#0d0d11; --ink2:#14141a; --ink3:#1a1a22;
-  --bone:#efe8dc; --mute:#8b8794;
-  --ice:#ff5a2e; --ice-soft:rgba(255,90,46,.14);
-  --line:rgba(239,232,220,.12);
-  --disp:'Syne',sans-serif; --body:'Instrument Sans',sans-serif; --mono:'Space Mono',monospace;
-  --ease:cubic-bezier(.22,.75,.2,1);
+--ink:#0d0d11; --ink2:#14141a; --ink3:#1a1a22;
+--bone:#efe8dc; --mute:#8b8794;
+--ice:#ff5a2e; --ice-soft:rgba(255,90,46,.14);
+--line:rgba(239,232,220,.12);
+--disp:'Syne',sans-serif; --body:'Instrument Sans',sans-serif; --mono:'Space Mono',monospace;
+--ease:cubic-bezier(.22,.75,.2,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{background:var(--ink);color:var(--bone);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
 ::selection{background:var(--ice);color:var(--ink)}
-img{display:block;max-width:100%}
+img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
 .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
 :focus-visible{outline:2px solid var(--ice);outline-offset:3px}
-
 /* ============ GRAIN + CURSOR + PROGRESS ============ */
 .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:200;opacity:.045;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 7s steps(8) infinite}
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+animation:grain 7s steps(8) infinite}
 @keyframes grain{0%,100%{transform:translate(0,0)}25%{transform:translate(-2%,3%)}50%{transform:translate(3%,-2%)}75%{transform:translate(-3%,-3%)}}
 .cur-dot,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%;transform:translate(-50%,-50%)}
 .cur-dot{width:7px;height:7px;background:var(--ice)}
@@ -41,7 +40,6 @@ button{font-family:inherit;cursor:pointer;background:none;border:none;color:inhe
 .cur-ring.big{width:56px;height:56px;border-color:var(--bone)}
 @media(hover:none){.cur-dot,.cur-ring{display:none}}
 .progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--ice);z-index:120}
-
 /* ============ NAV ============ */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,backdrop-filter .4s}
 .nav.scrolled{background:rgba(0,0,0,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
@@ -65,7 +63,6 @@ button{font-family:inherit;cursor:pointer;background:none;border:none;color:inhe
 .m-menu a em{font-family:var(--mono);font-style:normal;font-size:.7rem;color:var(--ice)}
 .menu-open .m-menu a{opacity:1;transform:none}
 .m-menu a:hover{color:var(--ice)}
-
 /* ============ HERO ============ */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;padding-bottom:clamp(24px,4vh,48px)}
 .hero::before{content:"";position:absolute;top:8%;left:50%;transform:translateX(-50%);width:90vw;height:60vh;background:radial-gradient(ellipse at center,rgba(255,90,46,.13),transparent 65%);pointer-events:none}
@@ -77,8 +74,8 @@ button{font-family:inherit;cursor:pointer;background:none;border:none;color:inhe
 .hero-sub p{max-width:50ch;font-size:.95rem}
 .hero-sub .tag{color:var(--ice)}
 .hero-art{display:flex;justify-content:center;align-items:center;margin:clamp(24px,5vh,56px) 0}
-.hero-art img{max-width:min(100%,900px);max-height:80vh;width:auto;height:auto;border:1px solid var(--line);filter:saturate(.92) contrast(1.04)}
-
+.hero-art img,
+.hero-art video{max-width:min(100%,900px);max-height:80vh;width:auto;height:auto;border:1px solid var(--line);filter:saturate(.92) contrast(1.04)}
 /* ============ SECTION SHELL ============ */
 section{padding:clamp(80px,12vh,140px) 0}
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(36px,6vh,64px);flex-wrap:wrap}
@@ -89,13 +86,11 @@ section{padding:clamp(80px,12vh,140px) 0}
 .in .lm>span{transform:none}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
 .in .rv,.rv.in{opacity:1;transform:none}
-
 /* ============ BUTTONS ============ */
 .btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;background:var(--ice);color:var(--ink);padding:15px 30px;border-radius:99px;transition:transform .35s var(--ease),box-shadow .35s}
 .btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px -10px rgba(255,90,46,.5)}
 .btn.ghost{background:none;color:var(--bone);border:1px solid var(--line)}
 .btn.ghost:hover{border-color:var(--bone);box-shadow:none}
-
 /* ============ LATEST RELEASE ============ */
 .release{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:clamp(30px,5vw,72px);align-items:center}
 .cover{position:relative;overflow:hidden;aspect-ratio:1;border:1px solid var(--line);background:#050505}
@@ -108,7 +103,6 @@ section{padding:clamp(80px,12vh,140px) 0}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
 .chips a{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;border:1px solid var(--line);padding:9px 16px;border-radius:99px;color:var(--mute);transition:border-color .3s,color .3s,transform .3s var(--ease)}
 .chips a:hover{border-color:var(--ice);color:var(--bone);transform:translateY(-3px)}
-
 /* ============ DISCOGRAPHY ============ */
 .d-list{border-top:1px solid var(--line)}
 .d-row{display:grid;grid-template-columns:90px 110px 1fr auto 40px;align-items:center;gap:18px;padding:20px 8px;border-bottom:1px solid var(--line);position:relative;transition:background .35s,padding .35s var(--ease)}
@@ -123,7 +117,6 @@ section{padding:clamp(80px,12vh,140px) 0}
 .cover-float{position:fixed;top:0;left:0;width:210px;aspect-ratio:1;z-index:80;pointer-events:none;opacity:0;transform:scale(.7) rotate(-6deg);transition:opacity .3s,scale .35s var(--ease);overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 60px -20px rgba(0,0,0,.7);background:#050505}
 .cover-float.show{opacity:1;transform:scale(1) rotate(3deg)}
 .cover-float img{width:100%;height:100%;object-fit:cover}
-
 /* ============ RELEASE DETAIL (expand-in-place) ============ */
 .d-detail{overflow:hidden;max-height:0;transition:max-height .5s var(--ease)}
 .d-detail.open{max-height:900px}
@@ -136,7 +129,6 @@ section{padding:clamp(80px,12vh,140px) 0}
 .player-embed{border:1px solid var(--line);margin-bottom:18px}
 .player-embed iframe{display:block;width:100%;height:120px;border:0}
 @media (max-width:760px){.d-detail-in{grid-template-columns:1fr}}
-
 /* ============ ABOUT ============ */
 .about-grid{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:clamp(36px,6vw,90px);align-items:start}
 .about-sticky{position:sticky;top:110px}
@@ -162,7 +154,6 @@ section{padding:clamp(80px,12vh,140px) 0}
 .era-row h4{font-family:var(--disp);font-weight:800;font-size:clamp(1.2rem,2.4vw,1.6rem)}
 .era-row p{color:var(--mute);font-size:.92rem;margin-top:4px}
 @media (max-width:760px){.era-row{grid-template-columns:1fr;gap:4px}}
-
 /* ============ COMMENTS ============ */
 .comments{margin-top:clamp(50px,8vh,90px);max-width:800px}
 .comments h4{font-family:var(--disp);font-weight:800;font-size:1.4rem;margin-bottom:22px}
@@ -179,7 +170,6 @@ section{padding:clamp(80px,12vh,140px) 0}
 .c-date{color:var(--mute);font-size:.8rem;font-family:var(--mono)}
 .c-item p{margin-top:6px;color:#c3d8e3;white-space:pre-wrap;overflow-wrap:anywhere}
 .c-empty{padding:20px 0;color:var(--mute)}
-
 /* ============ FOOTER ============ */
 footer{padding:clamp(60px,9vh,100px) 0 40px;border-top:1px solid var(--line)}
 .f-word{font-family:var(--disp);font-weight:800;font-size:clamp(2.6rem,9vw,7rem);line-height:1;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1.2px rgba(255,90,46,.5);margin-bottom:40px}
@@ -188,22 +178,21 @@ footer{padding:clamp(60px,9vh,100px) 0 40px;border-top:1px solid var(--line)}
 .f-grid a{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--mute);transition:color .3s}
 .f-grid a:hover{color:var(--ice)}
 .f-legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:22px;color:var(--mute);font-size:.68rem}
-
 @media (max-width:980px){
-  .nav-links,.nav-ind{display:none}
-  .burger{display:flex}
-  .release,.about-grid{grid-template-columns:1fr}
-  .about-sticky{position:static}
-  .d-row{grid-template-columns:70px 1fr auto;gap:10px}
-  .d-row .d-len,.d-row .d-sub{display:none}
+.nav-links,.nav-ind{display:none}
+.burger{display:flex}
+.release,.about-grid{grid-template-columns:1fr}
+.about-sticky{position:static}
+.d-row{grid-template-columns:70px 1fr auto;gap:10px}
+.d-row .d-len,.d-row .d-sub{display:none}
 }
 @media (max-width:640px){
-  .d-row{grid-template-columns:1fr auto}
-  .d-row .d-year{display:none}
+.d-row{grid-template-columns:1fr auto}
+.d-row .d-year{display:none}
 }
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}
-  .rv,.lm>span{opacity:1!important;transform:none!important}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}
+.rv,.lm>span{opacity:1!important;transform:none!important}
 }
 </style>
 </head>
@@ -212,464 +201,391 @@ footer{padding:clamp(60px,9vh,100px) 0 40px;border-top:1px solid var(--line)}
 <div class="cur-dot" aria-hidden="true"></div>
 <div class="cur-ring" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
-
 <!-- ================= NAV ================= -->
 <header class="nav" id="nav">
-  <div class="wrap nav-in">
-    <a class="logo" href="#top">NAAAN<i></i></a>
-    <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="#music" data-spy>Music</a>
-      <a href="#about" data-spy>About</a>
-      <span class="nav-ind" id="navInd" aria-hidden="true"></span>
-    </nav>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
-  </div>
-</header>
-
-<div class="m-menu" id="mMenu">
-  <a href="#music"><em>01</em>Music</a>
-  <a href="#about"><em>02</em>About</a>
+<div class="wrap nav-in">
+<a class="logo" href="#top">NAAAN<i></i></a>
+<nav class="nav-links" id="navLinks" aria-label="Primary">
+<a href="#music" data-spy>Music</a>
+<a href="#about" data-spy>About</a>
+<span class="nav-ind" id="navInd" aria-hidden="true"></span>
+</nav>
+<button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
 </div>
-
+</header>
+<div class="m-menu" id="mMenu">
+<a href="#music"><em>01</em>Music</a>
+<a href="#about"><em>02</em>About</a>
+</div>
 <main id="top">
-
 <!-- ================= HERO ================= -->
 <section class="hero wrap" style="padding-top:0">
-  
 <div class="hero-logo rv" style="--d:.1s">
-    <img src="photo5.png" alt="NAAAN" loading="eager">
-  </div>
-
+<img src="photo5.png" alt="NAAAN" loading="eager">
+</div>
 <div class="hero-meta mono">
-    <span>Solo artist &amp; multi-instrumentalist</span>
-    <span id="clock">--:-- LOCAL</span>
-  </div>
-
-  <div class="hero-sub">
-    <p class="rv" style="--d:.15s">One musician, four bands — <span class="tag">punk rock, progressive metal, techno, industrial rock, experimental, black metal and alt rock,</span> all in one place.</p>
-    
+<span>Solo artist & multi-instrumentalist</span>
+<span id="clock">--:-- LOCAL</span>
+</div>
+<div class="hero-sub">
+<p class="rv" style="--d:.15s">One musician, four bands — <span class="tag">punk rock, progressive metal, techno, industrial rock, experimental, black metal and alt rock,</span> all in one place.</p>
 <h2 class="sec-title">
 <span class="lm">
 <span>Coming Soon</span>
 </span>
 </h2>
-
-  <div class="hero-art rv" style="--d:.3s">
-    <img src="photo4.mp4" alt="NAAAN upcoming album promo" loading="eager">
-  </div>
-
-
-
+<div class="hero-art rv" style="--d:.3s">
+<video src="photo4.mp4" autoplay muted loop playsinline aria-label="NAAAN upcoming album promo"></video>
+</div>
 <p class="mono rv" style="--d:.25s">All releases, playable below ↴</p>
-  </div>
-
-  
+</div>
 </section>
-
 <!-- ================= MUSIC ================= -->
 <section id="music">
-  <div class="wrap">
-    <div class="sec-head io">
-      <div>
-        <span class="kicker mono">01 / Music</span>
-        <h2 class="sec-title"><span class="lm"><span>The catalogue</span></span></h2>
-      </div>
-      <p class="mono" style="color:var(--mute)" id="releaseCount">— releases</p>
-    </div>
-
-    <div class="release io" id="latestRelease"></div>
-
-    <div class="d-list io" style="margin-top:clamp(60px,9vh,100px)" id="dlist"></div>
-  </div>
+<div class="wrap">
+<div class="sec-head io">
+<div>
+<span class="kicker mono">01 / Music</span>
+<h2 class="sec-title"><span class="lm"><span>The catalogue</span></span></h2>
+</div>
+<p class="mono" style="color:var(--mute)" id="releaseCount">— releases</p>
+</div>
+<div class="release io" id="latestRelease"></div>
+<div class="d-list io" style="margin-top:clamp(60px,9vh,100px)" id="dlist"></div>
+</div>
 </section>
-
 <div class="cover-float" id="coverFloat" aria-hidden="true"><img src="" alt=""></div>
-
 <!-- ================= ABOUT ================= -->
 <section id="about">
-  <div class="wrap">
-    <div class="sec-head io">
-      <div>
-        <span class="kicker mono">02 / The artist</span>
-        <h2 class="sec-title"><span class="lm"><span>One signal, many bands</span></span></h2>
-      </div>
-    </div>
-    <div class="about-grid io">
-      <div class="about-sticky rv">
-        <div class="about-photo">
-          <img src="photo2.jpg" alt="NAAAN portrait">
-          <div class="cap">NAAAN — composer &amp; multi-instrumentalist</div>
-        </div>
-        <div class="stats">
-          <div class="stat"><b data-count="4">0</b><span>Projects</span></div>
-          <div class="stat"><b data-count="6">0</b><span>Releases</span></div>
-          <div class="stat"><b data-count="20">0</b><span>Years writing</span></div>
-          <div class="stat"><b data-count="6">0</b><span>Instruments played</span></div>
-        </div>
-      </div>
-      <div class="about-body">
-        <p class="rv">NAAAN is a composer and multi-instrumentalist working across <span class="hl">punk rock, progressive metal, techno, industrial rock, experimental music, black metal and alt rock.</span> Across two decades this has meant guitar, bass, 6-string bass, vocals, synth and drum programming, spread across four very different bands.</p>
-        <p class="rv" style="--d:.08s">Every project sounds different on purpose. What ties them together is the same restless approach to songwriting — <span class="hl">heavy, electronic, melodic and unafraid to mix genres</span> inside a single record.</p>
-        <blockquote class="pull rv" style="--d:.12s">
-          "Different bands, different sounds — same obsession with pushing a song somewhere it isn't supposed to go."
-        </blockquote>
-        <p class="rv" style="--d:.16s">This site brings every project together in one place, so you can listen, download and leave a comment on any release.</p>
-        <div class="collab rv" style="--d:.2s" id="projectTags"></div>
-
-        <div class="proj-era" id="eraList"></div>
-      </div>
-    </div>
-
-    <div class="comments" id="comments"></div>
-  </div>
+<div class="wrap">
+<div class="sec-head io">
+<div>
+<span class="kicker mono">02 / The artist</span>
+<h2 class="sec-title"><span class="lm"><span>One signal, many bands</span></span></h2>
+</div>
+</div>
+<div class="about-grid io">
+<div class="about-sticky rv">
+<div class="about-photo">
+<img src="photo2.jpg" alt="NAAAN portrait">
+<div class="cap">NAAAN — composer & multi-instrumentalist</div>
+</div>
+<div class="stats">
+<div class="stat"><b data-count="4">0</b><span>Projects</span></div>
+<div class="stat"><b data-count="6">0</b><span>Releases</span></div>
+<div class="stat"><b data-count="20">0</b><span>Years writing</span></div>
+<div class="stat"><b data-count="6">0</b><span>Instruments played</span></div>
+</div>
+</div>
+<div class="about-body">
+<p class="rv">NAAAN is a composer and multi-instrumentalist working across <span class="hl">punk rock, progressive metal, techno, industrial rock, experimental music, black metal and alt rock.</span> Across two decades this has meant guitar, bass, 6-string bass, vocals, synth and drum programming, spread across four very different bands.</p>
+<p class="rv" style="--d:.08s">Every project sounds different on purpose. What ties them together is the same restless approach to songwriting — <span class="hl">heavy, electronic, melodic and unafraid to mix genres</span> inside a single record.</p>
+<blockquote class="pull rv" style="--d:.12s">
+"Different bands, different sounds — same obsession with pushing a song somewhere it isn't supposed to go."
+</blockquote>
+<p class="rv" style="--d:.16s">This site brings every project together in one place, so you can listen, download and leave a comment on any release.</p>
+<div class="collab rv" style="--d:.2s" id="projectTags"></div>
+<div class="proj-era" id="eraList"></div>
+</div>
+</div>
+<div class="comments" id="comments"></div>
+</div>
 </section>
-
 </main>
-
 <!-- ================= FOOTER ================= -->
 <footer>
-  <div class="wrap">
-    <div class="f-word" aria-hidden="true">NAAAN</div>
-    <div class="f-grid">
-      <div>
-        <a href="#music">MUSIC</a><a href="#about">ABOUT</a><a href="#top">BACK TO TOP ↑</a>
-      </div>
-      <span class="mono" id="clock2">--:-- LOCAL</span>
-    </div>
-    <div class="f-legal mono">
-      <span>© 2026 NAAAN</span>
-      <span>Music streams from Bandcamp.</span>
-    </div>
-  </div>
+<div class="wrap">
+<div class="f-word" aria-hidden="true">NAAAN</div>
+<div class="f-grid">
+<div>
+<a href="#music">MUSIC</a><a href="#about">ABOUT</a><a href="#top">BACK TO TOP ↑</a>
+</div>
+<span class="mono" id="clock2">--:-- LOCAL</span>
+</div>
+<div class="f-legal mono">
+<span>© 2026 NAAAN</span>
+<span>Music streams from Bandcamp.</span>
+</div>
+</div>
 </footer>
-
 <script>
 /* ============================================================
-   CONTENT — edit this section to add music.
-   ============================================================ */
+CONTENT — edit this section to add music.
+============================================================ */
 const PROJECTS = [
-  { id:'quantum-artifact', name:'Quantum Artifact', years:'2026', genre:'Punk, progressive, industrial, metal', role:'6-string bass, bass, drum programming' },
-  { id:'puras-babas', name:'Puras Babas', years:'2026', genre:'Punk en español', role:'Guitar, bass, drums, vocals' },
-  { id:'scorpio-sun', name:'Scorpio Sun', years:'2012–2016', genre:'Progressive metal', role:'Guitar' },
-  { id:'darkside-project', name:'The Darkside Project', years:'2005–2010', genre:'Punk, metal, electronic', role:'Main composer, guitar, vocals, synth' }
+{ id:'quantum-artifact', name:'Quantum Artifact', years:'2026', genre:'Punk, progressive, industrial, metal', role:'6-string bass, bass, drum programming' },
+{ id:'puras-babas', name:'Puras Babas', years:'2026', genre:'Punk en español', role:'Guitar, bass, drums, vocals' },
+{ id:'scorpio-sun', name:'Scorpio Sun', years:'2012–2016', genre:'Progressive metal', role:'Guitar' },
+{ id:'darkside-project', name:'The Darkside Project', years:'2005–2010', genre:'Punk, metal, electronic', role:'Main composer, guitar, vocals, synth' }
 ];
-
 const RELEASES = [
-  {
-    id:'quantum-artifact-singles', title:'Singles', project:'quantum-artifact', year:'2026',
-    when:'Released 20 September 2026', type:'Singles', seed:1,
-    cover:'https://f4.bcbits.com/img/a3785407216_5.jpg',
-    bcId:102500890, url:'https://quantumartifact.bandcamp.com/album/singles',
-    tracks:['Small Brains, Big Business','Acid Clown Meltdown','The Grand Unification'],
-    note:'Pre-release versions of tunes that will be officially re-released later. More music is on the way.',
-    latest:true, badge:'NEW'
-  },
-  {
-    id:'liberame', title:'Libérame', project:'puras-babas', year:'2026',
-    when:'Released 10 February 2026', type:'Single', seed:2,
-    cover:'https://f4.bcbits.com/img/a2692256492_5.jpg',
-    bcId:3180473606, bcType:'track', url:'https://purasbabas.bandcamp.com/track/lib-rame',
-    tracks:['Libérame'],
-    note:'Punk en español.'
-  },
-  {
-    id:'moving-forward', title:'Moving Forward', project:'scorpio-sun', year:'2016',
-    when:'Released 23 September 2016', type:'Single', seed:3,
-    cover:'https://f4.bcbits.com/img/a0911571827_5.jpg',
-    bcId:2106577940, url:'https://scorpiosun.bandcamp.com/album/moving-forward-single',
-    tracks:['Moving Forward'], note:''
-  },
-  {
-    id:'infinite-moment', title:'Infinite Moment', project:'scorpio-sun', year:'2015',
-    when:'Released 26 October 2015', type:'Album', seed:4,
-    cover:'https://f4.bcbits.com/img/a3361704530_5.jpg',
-    bcId:2518672587, url:'https://scorpiosun.bandcamp.com/album/infinite-moment', free:true,
-    tracks:['The Recluse','Letting Go','Illusion of Self','Reintroduction','Polarity Integration','Universe of Formless Vibrations'],
-    note:'The first Scorpio Sun album. Free to download: enter $0 when Bandcamp asks you to name your price.'
-  },
-  {
-    id:'d-construction', title:'D-construction', project:'darkside-project', year:'2005–2010',
-    when:'From 2005–2010', type:'Album', seed:5, cover:'', trackCount:11,
-    ext:'https://dddride.wixsite.com/thedarksideproject', extLabel:'Listen on the original site',
-    tracks:[], note:'The second Darkside Project album. All 11 tracks play in the player on the original site. Track titles and artwork are coming soon.'
-  },
-  {
-    id:'demo-lition', title:'Demo-lition', project:'darkside-project', year:'2005–2010',
-    when:'From 2005–2010', type:'Album', seed:6, cover:'', trackCount:15,
-    ext:'https://dddride.wixsite.com/thedarksideproject', extLabel:'Listen on the original site',
-    tracks:[], note:'The first Darkside Project album. All 15 tracks play in the player on the original site. Track titles and artwork are coming soon.'
-  }
+{
+id:'quantum-artifact-singles', title:'Singles', project:'quantum-artifact', year:'2026',
+when:'Released 20 September 2026', type:'Singles', seed:1,
+cover:'https://f4.bcbits.com/img/a3785407216_5.jpg',
+bcId:102500890, url:'https://quantumartifact.bandcamp.com/album/singles',
+tracks:['Small Brains, Big Business','Acid Clown Meltdown','The Grand Unification'],
+note:'Pre-release versions of tunes that will be officially re-released later. More music is on the way.',
+latest:true, badge:'NEW'
+},
+{
+id:'liberame', title:'Libérame', project:'puras-babas', year:'2026',
+when:'Released 10 February 2026', type:'Single', seed:2,
+cover:'https://f4.bcbits.com/img/a2692256492_5.jpg',
+bcId:3180473606, bcType:'track', url:'https://purasbabas.bandcamp.com/track/lib-rame',
+tracks:['Libérame'],
+note:'Punk en español.'
+},
+{
+id:'moving-forward', title:'Moving Forward', project:'scorpio-sun', year:'2016',
+when:'Released 23 September 2016', type:'Single', seed:3,
+cover:'https://f4.bcbits.com/img/a0911571827_5.jpg',
+bcId:2106577940, url:'https://scorpiosun.bandcamp.com/album/moving-forward-single',
+tracks:['Moving Forward'], note:''
+},
+{
+id:'infinite-moment', title:'Infinite Moment', project:'scorpio-sun', year:'2015',
+when:'Released 26 October 2015', type:'Album', seed:4,
+cover:'https://f4.bcbits.com/img/a3361704530_5.jpg',
+bcId:2518672587, url:'https://scorpiosun.bandcamp.com/album/infinite-moment', free:true,
+tracks:['The Recluse','Letting Go','Illusion of Self','Reintroduction','Polarity Integration','Universe of Formless Vibrations'],
+note:'The first Scorpio Sun album. Free to download: enter $0 when Bandcamp asks you to name your price.'
+},
+{
+id:'d-construction', title:'D-construction', project:'darkside-project', year:'2005–2010',
+when:'From 2005–2010', type:'Album', seed:5, cover:'', trackCount:11,
+ext:'https://dddride.wixsite.com/thedarksideproject', extLabel:'Listen on the original site',
+tracks:[], note:'The second Darkside Project album. All 11 tracks play in the player on the original site. Track titles and artwork are coming soon.'
+},
+{
+id:'demo-lition', title:'Demo-lition', project:'darkside-project', year:'2005–2010',
+when:'From 2005–2010', type:'Album', seed:6, cover:'', trackCount:15,
+ext:'https://dddride.wixsite.com/thedarksideproject', extLabel:'Listen on the original site',
+tracks:[], note:'The first Darkside Project album. All 15 tracks play in the player on the original site. Track titles and artwork are coming soon.'
+}
 ];
-
 /* ============================================================
-   HELPERS
-   ============================================================ */
+HELPERS
+============================================================ */
 const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TOUCH=matchMedia('(hover: none)').matches;
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&','<':'<','>':'>','"':'"',"'":'''}[c]));
 const proj=id=>PROJECTS.find(p=>p.id===id);
-
 function waveSVG(seed){
-  let paths='';
-  for(let i=0;i<6;i++){
-    const amp=8+((seed*7+i*13)%34), freq=1+((seed+i*3)%4), y0=70+i*32+((seed*11)%18);
-    let d='M0 '+y0;
-    for(let x=0;x<=300;x+=5){ d+=' L'+x+' '+(y0+Math.sin(x/300*Math.PI*2*freq+seed+i)*amp).toFixed(1); }
-    paths+=`<path d="${d}" fill="none" stroke="#ff5a2e" stroke-opacity="${(0.8-i*0.11).toFixed(2)}" stroke-width="1"/>`;
-  }
-  return `<svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Artwork coming soon"><defs><radialGradient id="g${seed}" cx="50%" cy="60%" r="70%"><stop offset="0" stop-color="#ff5a2e" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs><rect width="300" height="300" fill="#000"/><rect width="300" height="300" fill="url(#g${seed})"/>${paths}</svg>`;
+let paths='';
+for(let i=0;i<6;i++){
+const amp=8+((seed*7+i*13)%34), freq=1+((seed+i*3)%4), y0=70+i*32+((seed*11)%18);
+let d='M0 '+y0;
+for(let x=0;x<=300;x+=5){ d+=' L'+x+' '+(y0+Math.sin(x/300*Math.PI*2*freq+seed+i)*amp).toFixed(1); }
+paths+=<path d="${d}" fill="none" stroke="#ff5a2e" stroke-opacity="${(0.8-i*0.11).toFixed(2)}" stroke-width="1"/>;
+}
+return <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Artwork coming soon"><defs><radialGradient id="g${seed}" cx="50%" cy="60%" r="70%"><stop offset="0" stop-color="#ff5a2e" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs><rect width="300" height="300" fill="#000"/><rect width="300" height="300" fill="url(#g${seed})"/>${paths}</svg>;
 }
 function coverHTML(r){
-  if(r.cover) return `<img src="${esc(r.cover)}" alt="${esc(r.title)} cover art" loading="lazy" data-seed="${r.seed}">`;
-  return waveSVG(r.seed);
+if(r.cover) return <img src="${esc(r.cover)}" alt="${esc(r.title)} cover art" loading="lazy" data-seed="${r.seed}">;
+return waveSVG(r.seed);
 }
 document.addEventListener('error',e=>{
-  const t=e.target;
-  if(t&&t.tagName==='IMG'&&t.dataset.seed){ t.insertAdjacentHTML('afterend',waveSVG(Number(t.dataset.seed))); t.remove(); }
+const t=e.target;
+if(t&&t.tagName==='IMG'&&t.dataset.seed){ t.insertAdjacentHTML('afterend',waveSVG(Number(t.dataset.seed))); t.remove(); }
 },true);
-
 function playerHTML(r){
-  if(!r.bcId) return `<p class="mono" style="color:var(--mute);margin-bottom:18px">Listen on the original site — link below.</p>`;
-  const type=r.bcType||'album';
-  return `<div class="player-embed"><iframe title="Player for ${esc(r.title)}" src="https://bandcamp.com/EmbeddedPlayer/${type}=${r.bcId}/size=large/bgcol=000000/linkcol=a8e1ff/tracklist=false/artwork=small/transparent=true/" loading="lazy" allow="autoplay"></iframe></div>`;
+if(!r.bcId) return <p class="mono" style="color:var(--mute);margin-bottom:18px">Listen on the original site — link below.</p>;
+const type=r.bcType||'album';
+return <div class="player-embed"><iframe title="Player for ${esc(r.title)}" src="https://bandcamp.com/EmbeddedPlayer/${type}=${r.bcId}/size=large/bgcol=000000/linkcol=a8e1ff/tracklist=false/artwork=small/transparent=true/" loading="lazy" allow="autoplay"></iframe></div>;
 }
-
 /* ============================================================
-   RENDER: latest release
-   ============================================================ */
+RENDER: latest release
+============================================================ */
 const latest = RELEASES.find(r=>r.latest) || RELEASES[0];
-$('#latestRelease').innerHTML = `
-  <div class="cover rv" style="--d:.05s">
-    ${coverHTML(latest)}
-    ${latest.badge?`<span class="badge">${esc(latest.badge)}</span>`:''}
-  </div>
-  <div class="rel-body">
-    <span class="mono rv" style="--d:.1s;color:var(--mute)">${esc(latest.type)} · ${esc(proj(latest.project).name)} · ${esc(latest.year)}</span>
-    <h3 class="rv" style="--d:.15s">${esc(latest.title)}</h3>
-    <p class="rv" style="--d:.2s">${esc(latest.note || '')}</p>
-    <div class="chips rv" style="--d:.25s">
-      <a href="${esc(latest.url || latest.ext)}" target="_blank" rel="noopener">Bandcamp ↗</a>
-    </div>
-    <div class="rv" style="--d:.3s">
-      <a class="btn" href="#d-${esc(latest.id)}" data-open="${esc(latest.id)}">▶ Listen now</a>
-    </div>
-  </div>`;
-
+('#latestRelease').innerHTML = `
+<div class="cover rv" style="--d:.05s">
+${coverHTML(latest)}
+${latest.badge?`<span class="badge">{esc(latest.badge)}</span>:''} </div> <div class="rel-body"> <span class="mono rv" style="--d:.1s;color:var(--mute)">${esc(latest.type)} · ${esc(proj(latest.project).name)} · ${esc(latest.year)}</span> <h3 class="rv" style="--d:.15s">${esc(latest.title)}</h3> <p class="rv" style="--d:.2s">${esc(latest.note || '')}</p> <div class="chips rv" style="--d:.25s"> <a href="${esc(latest.url || latest.ext)}" target="_blank" rel="noopener">Bandcamp ↗</a> </div> <div class="rv" style="--d:.3s"> <a class="btn" href="#d-${esc(latest.id)}" data-open="${esc(latest.id)}">▶ Listen now</a> </div> </div>;
 /* ============================================================
-   RENDER: discography list with expand-in-place detail
-   ============================================================ */
+RENDER: discography list with expand-in-place detail
+============================================================ */
 const dlist = $('#dlist');
 RELEASES.forEach((r,i)=>{
-  const row=document.createElement('a');
-  row.className='d-row rv'; row.href='#d-'+r.id; row.style.setProperty('--d',(i*.04).toFixed(2)+'s');
-  row.dataset.cover = r.cover || '';
-  row.dataset.open = r.id;
-  row.innerHTML = `<span class="d-year">${esc(r.year.split('–')[0])}</span><span class="d-type">${esc(r.type)}</span>
-    <span class="d-title">${esc(r.title)}<span class="d-sub">${esc(proj(r.project).name)}</span></span>
-    <span class="d-len">${r.tracks.length ? r.tracks.length+' tracks' : (r.trackCount ? r.trackCount+' tracks' : '')}</span>
-    <span class="d-arrow">→</span>`;
-  dlist.appendChild(row);
-
-  const detail=document.createElement('div');
-  detail.className='d-detail'; detail.id='d-'+r.id;
-  const tracksHTML = r.tracks.length
-    ? `<ol class="tracks">${r.tracks.map((t,n)=>`<li><span>${String(n+1).padStart(2,'0')}</span>${esc(t)}</li>`).join('')}</ol>`
-    : '';
-  const dlBtn = r.url
-    ? `<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener">${r.free?'Free download ↗':'Get on Bandcamp ↗'}</a>`
-    : `<a class="btn ghost" href="${esc(r.ext)}" target="_blank" rel="noopener">${esc(r.extLabel)} ↗</a>`;
-  detail.innerHTML = `<div class="d-detail-in">
-    <div class="cover">${coverHTML(r)}</div>
-    <div class="d-detail-body">
-      <span class="mono" style="color:var(--mute)">${esc(r.when)}</span>
-      <p style="margin-top:10px">${esc(r.note||'')}</p>
-      ${playerHTML(r)}
-      ${tracksHTML}
-      <div style="margin-top:20px">${dlBtn}</div>
-    </div>
-  </div>`;
-  dlist.appendChild(detail);
+const row=document.createElement('a');
+row.className='d-row rv'; row.href='#d-'+r.id; row.style.setProperty('--d',(i*.04).toFixed(2)+'s');
+row.dataset.cover = r.cover || '';
+row.dataset.open = r.id;
+row.innerHTML = <span class="d-year">${esc(r.year.split('–')[0])}</span><span class="d-type">${esc(r.type)}</span> <span class="d-title">${esc(r.title)}<span class="d-sub">${esc(proj(r.project).name)}</span></span> <span class="d-len">${r.tracks.length ? r.tracks.length+' tracks' : (r.trackCount ? r.trackCount+' tracks' : '')}</span> <span class="d-arrow">→</span>;
+dlist.appendChild(row);
+const detail=document.createElement('div');
+detail.className='d-detail'; detail.id='d-'+r.id;
+const tracksHTML = r.tracks.length
+? <ol class="tracks">${r.tracks.map((t,n)=><li><span>{String(n+1).padStart(2,'0')}</span>{esc(t)}</li>).join('')}</ol>
+: '';
+const dlBtn = r.url
+? <a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener">${r.free?'Free download ↗':'Get on Bandcamp ↗'}</a>
+: <a class="btn ghost" href="${esc(r.ext)}" target="_blank" rel="noopener">${esc(r.extLabel)} ↗</a>;
+detail.innerHTML = <div class="d-detail-in"> <div class="cover">${coverHTML(r)}</div> <div class="d-detail-body"> <span class="mono" style="color:var(--mute)">${esc(r.when)}</span> <p style="margin-top:10px">${esc(r.note||'')}</p> ${playerHTML(r)} ${tracksHTML} <div style="margin-top:20px">${dlBtn}</div> </div> </div>;
+dlist.appendChild(detail);
 });
 $('#releaseCount').textContent = RELEASES.length + ' releases';
-
 dlist.addEventListener('click', e=>{
-  const row = e.target.closest('[data-open]');
-  if(!row) return;
-  e.preventDefault();
-  const id = row.dataset.open;
-  const panel = document.getElementById('d-'+id);
-  const wasOpen = panel.classList.contains('open');
-  $$('.d-detail.open', dlist).forEach(p=>p.classList.remove('open'));
-  if(!wasOpen){
-    panel.classList.add('open');
-    setTimeout(()=>panel.scrollIntoView({behavior: RM?'auto':'smooth', block:'nearest'}), 120);
-  }
+const row = e.target.closest('[data-open]');
+if(!row) return;
+e.preventDefault();
+const id = row.dataset.open;
+const panel = document.getElementById('d-'+id);
+const wasOpen = panel.classList.contains('open');
+$$('.d-detail.open', dlist).forEach(p=>p.classList.remove('open'));
+if(!wasOpen){
+panel.classList.add('open');
+setTimeout(()=>panel.scrollIntoView({behavior: RM?'auto':'smooth', block:'nearest'}), 120);
+}
 });
 $('#latestRelease').addEventListener('click', e=>{
-  const b = e.target.closest('[data-open]');
-  if(!b) return;
-  e.preventDefault();
-  location.hash = '#music';
-  const panel = document.getElementById('d-'+b.dataset.open);
-  panel.classList.add('open');
-  setTimeout(()=>panel.scrollIntoView({behavior: RM?'auto':'smooth', block:'center'}), 200);
+const b = e.target.closest('[data-open]');
+if(!b) return;
+e.preventDefault();
+location.hash = '#music';
+const panel = document.getElementById('d-'+b.dataset.open);
+panel.classList.add('open');
+setTimeout(()=>panel.scrollIntoView({behavior: RM?'auto':'smooth', block:'center'}), 200);
 });
-
 /* ============================================================
-   RENDER: about — project tags + era rows
-   ============================================================ */
-$('#projectTags').innerHTML = PROJECTS.map(p=>`<span>${esc(p.name)}</span>`).join('');
-$('#eraList').innerHTML = PROJECTS.map(p=>`
-  <div class="era-row">
-    <span class="era-years mono">${esc(p.years)}</span>
-    <div><h4>${esc(p.name)}</h4><p>${esc(p.genre)} — ${esc(p.role)}</p></div>
-  </div>`).join('');
-
+RENDER: about — project tags + era rows
+============================================================ */
+$('#projectTags').innerHTML = PROJECTS.map(p=><span>${esc(p.name)}</span>).join('');
+$('#eraList').innerHTML = PROJECTS.map(p=> <div class="era-row"> <span class="era-years mono">${esc(p.years)}</span> <div><h4>${esc(p.name)}</h4><p>${esc(p.genre)} — ${esc(p.role)}</p></div> </div>).join('');
 /* ============================================================
-   COMMENTS (shared storage in the preview; swap for a database
-   such as Supabase or Firebase when you host the site)
-   ============================================================ */
+COMMENTS (shared storage in the preview; swap for a database
+such as Supabase or Firebase when you host the site)
+============================================================ */
 const memory = {};
 async function loadComments(id){
-  try{
-    const r = await window.storage.get('comments:'+id, true);
-    return r && r.value ? JSON.parse(r.value) : [];
-  }catch(e){ return memory[id] || []; }
+try{
+const r = await window.storage.get('comments:'+id, true);
+return r && r.value ? JSON.parse(r.value) : [];
+}catch(e){ return memory[id] || []; }
 }
 async function saveComments(id, list){
-  try{ await window.storage.set('comments:'+id, JSON.stringify(list), true); }
-  catch(e){ memory[id] = list; }
+try{ await window.storage.set('comments:'+id, JSON.stringify(list), true); }
+catch(e){ memory[id] = list; }
 }
 function timeAgo(ts){
-  const s=Math.max(1,Math.floor((Date.now()-ts)/1000));
-  if(s<60) return 'just now';
-  const m=Math.floor(s/60); if(m<60) return m+'m ago';
-  const h=Math.floor(m/60); if(h<24) return h+'h ago';
-  const d=Math.floor(h/24); if(d<30) return d+'d ago';
-  return new Date(ts).toLocaleDateString();
+const s=Math.max(1,Math.floor((Date.now()-ts)/1000));
+if(s<60) return 'just now';
+const m=Math.floor(s/60); if(m<60) return m+'m ago';
+const h=Math.floor(m/60); if(h<24) return h+'h ago';
+const d=Math.floor(h/24); if(d<30) return d+'d ago';
+return new Date(ts).toLocaleDateString();
 }
 async function initComments(){
-  const box=$('#comments');
-  box.innerHTML = `
-    <h4>Comments</h4>
-    <div class="c-field"><label for="cname">Name</label><input id="cname" type="text" maxlength="40" placeholder="Your name"></div>
-    <div class="c-field"><label for="ctext">Comment</label><textarea id="ctext" maxlength="600" placeholder="Say something about the music"></textarea></div>
-    <button class="btn" id="cpost" type="button">Post comment</button>
-    <div id="cstatus" role="status"></div>
-    <div class="clist" id="clist"></div>`;
-  const render=list=>{
-    const clist=$('#clist');
-    if(!list.length){ clist.innerHTML='<p class="c-empty">No comments yet — be the first.</p>'; return; }
-    clist.innerHTML = list.map(c=>`
-      <div class="c-item"><div class="c-head"><span class="c-name">${esc(c.n)}</span><span class="c-date">${timeAgo(c.d)}</span></div>
-      <p>${esc(c.t)}</p></div>`).join('');
-  };
-  render(await loadComments('site'));
-  $('#cpost').addEventListener('click', async ()=>{
-    const n=$('#cname').value.trim().slice(0,40), t=$('#ctext').value.trim().slice(0,600);
-    const status=$('#cstatus');
-    if(!n||!t){ status.textContent='Add your name and a comment.'; return; }
-    const list=await loadComments('site');
-    list.unshift({n,t,d:Date.now()});
-    await saveComments('site', list);
-    $('#ctext').value=''; status.textContent='Posted.';
-    render(list);
-  });
+const box=('#comments');
+box.innerHTML = `
+<h4>Comments</h4>
+<div class="c-field"><label for="cname">Name</label><input id="cname" type="text" maxlength="40" placeholder="Your name"></div>
+<div class="c-field"><label for="ctext">Comment</label><textarea id="ctext" maxlength="600" placeholder="Say something about the music"></textarea></div>
+<button class="btn" id="cpost" type="button">Post comment</button>
+<div id="cstatus" role="status"></div>
+<div class="clist" id="clist"></div>`;
+const render=list=>{
+const clist=('#clist');
+if(!list.length){ clist.innerHTML='<p class="c-empty">No comments yet — be the first.</p>'; return; }
+clist.innerHTML = list.map(c=> <div class="c-item"><div class="c-head"><span class="c-name">${esc(c.n)}</span><span class="c-date">${timeAgo(c.d)}</span></div> <p>${esc(c.t)}</p></div>).join('');
+};
+render(await loadComments('site'));
+('#cpost').addEventListener('click', async ()=>{
+const n=('#cname').value.trim().slice(0,40), t=('#ctext').value.trim().slice(0,600);
+const status=('#cstatus');
+if(!n||!t){ status.textContent='Add your name and a comment.'; return; }
+const list=await loadComments('site');
+list.unshift({n,t,d:Date.now()});
+await saveComments('site', list);
+$('#ctext').value=''; status.textContent='Posted.';
+render(list);
+});
 }
 initComments();
-
 /* ================= CLOCK ================= */
 function tickClock(){
-  const t=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+' LOCAL';
-  $('#clock').textContent=t; $('#clock2').textContent=t;
+const t=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+' LOCAL';
+$('#clock').textContent=t; $('#clock2').textContent=t;
 }
 tickClock(); setInterval(tickClock, 20000);
-
 /* ================= NAV: scroll state + progress ================= */
-const nav=$('#nav'), prog=$('#progress');
+const nav=('#nav'), prog=('#progress');
 addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled', scrollY>40);
-  const h=document.documentElement;
-  prog.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%';
+nav.classList.toggle('scrolled', scrollY>40);
+const h=document.documentElement;
+prog.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%';
 },{passive:true});
-
 /* ================= MOBILE MENU ================= */
 $('#burger').addEventListener('click',()=>document.body.classList.toggle('menu-open'));
 $$('#mMenu a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
-
 /* ================= SCROLLSPY + SLIDING INDICATOR ================= */
-const spyLinks=$$('[data-spy]'), ind=$('#navInd');
+const spyLinks=$$('[data-spy]'), ind=('#navInd');
 function setActive(id){
-  spyLinks.forEach(a=>{
-    const on=a.getAttribute('href')==='#'+id;
-    a.classList.toggle('active',on);
-    if(on&&!TOUCH){ ind.style.opacity=1; ind.style.left=a.offsetLeft+'px'; ind.style.width=a.offsetWidth+'px'; }
-  });
+spyLinks.forEach(a=>{
+const on=a.getAttribute('href')==='#'+id;
+a.classList.toggle('active',on);
+if(on&&!TOUCH){ ind.style.opacity=1; ind.style.left=a.offsetLeft+'px'; ind.style.width=a.offsetWidth+'px'; }
+});
 }
 const spyIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting) setActive(e.target.id)})},{rootMargin:'-35% 0px -55% 0px'});
 ['music','about'].forEach(id=>{const el=document.getElementById(id); if(el) spyIO.observe(el);});
-addEventListener('resize',()=>{const a=$('[data-spy].active'); if(a){ ind.style.left=a.offsetLeft+'px'; ind.style.width=a.offsetWidth+'px'; }});
-
+addEventListener('resize',()=>{const a=('[data-spy].active'); if(a){ ind.style.left=a.offsetLeft+'px'; ind.style.width=a.offsetWidth+'px'; }});
 /* ================= REVEAL ON SCROLL ================= */
 const rvIO=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
-  e.target.classList.add('in'); rvIO.unobserve(e.target);
-  if(!RM) $('[data-scramble]', e.target).forEach(scramble);
+e.target.classList.add('in'); rvIO.unobserve(e.target);
+if(!RM) $('[data-scramble]', e.target).forEach(scramble);
 }})},{threshold:.18});
-$$('.io').forEach(el=>rvIO.observe(el));
-$$('.rv').forEach(el=>{ if(!el.closest('.io')) rvIO.observe(el); });
-$$('[data-scramble]').forEach(el=>{ el.dataset.text=el.textContent; if(!RM) el.textContent=''.padStart(el.dataset.text.length,'░'); });
 
+('.rv').forEach(el=>{ if(!el.closest('.io')) rvIO.observe(el); });
+$$('[data-scramble]').forEach(el=>{ el.dataset.text=el.textContent; if(!RM) el.textContent=''.padStart(el.dataset.text.length,'░'); });
 /* ================= SCRAMBLE DECODE ================= */
 function scramble(el){
-  const final=el.dataset.text||el.textContent, chars='█▓▒░<>/\\+=*';
-  let f=0; const total=Math.max(16, final.length*2.2);
-  (function t(){
-    let out=''; const reveal=(f/total)*final.length;
-    for(let i=0;i<final.length;i++){ out+= i<reveal ? final[i] : chars[Math.random()*chars.length|0]; }
-    el.textContent=out;
-    if(f++<total) requestAnimationFrame(t); else el.textContent=final;
-  })();
+const final=el.dataset.text||el.textContent, chars='█▓▒░<>/\+=*';
+let f=0; const total=Math.max(16, final.length*2.2);
+(function t(){
+let out=''; const reveal=(f/total)*final.length;
+for(let i=0;i<final.length;i++){ out+= i<reveal ? final[i] : chars[Math.random()*chars.length|0]; }
+el.textContent=out;
+if(f++<total) requestAnimationFrame(t); else el.textContent=final;
+})();
 }
-
 /* ================= COUNT-UP STATS ================= */
 const cIO=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting) return; cIO.unobserve(e.target);
-  const end=+e.target.dataset.count, t0=performance.now();
-  if(RM){ e.target.textContent=end; return; }
-  (function u(n){ const p=Math.min(1,(n-t0)/1200), v=Math.round(end*(1-Math.pow(1-p,3)));
-    e.target.textContent=v; if(p<1) requestAnimationFrame(u); })(t0);
+const end=+e.target.dataset.count, t0=performance.now();
+if(RM){ e.target.textContent=end; return; }
+(function u(n){ const p=Math.min(1,(n-t0)/1200), v=Math.round(end*(1-Math.pow(1-p,3)));
+e.target.textContent=v; if(p<1) requestAnimationFrame(u); })(t0);
 })},{threshold:.6});
 $$('[data-count]').forEach(el=>cIO.observe(el));
-
 /* ================= DISCOGRAPHY: CURSOR-TRAILING COVER ================= */
-const cf=$('#coverFloat'), cfImg=$('img',cf);
+const cf=('#coverFloat'), cfImg=('img',cf);
 let cx=0, cy=0, px=0, py=0, cfOn=false;
 if(!TOUCH && !RM){
-  $$('#dlist .d-row').forEach(r=>{
-    r.addEventListener('mouseenter',()=>{
-      if(r.dataset.cover){ cfImg.src=r.dataset.cover; cf.classList.add('show'); cfOn=true; }
-    });
-    r.addEventListener('mouseleave',()=>{ cf.classList.remove('show'); cfOn=false; });
-  });
-  addEventListener('mousemove', e=>{ cx=e.clientX+24; cy=e.clientY-90; }, {passive:true});
-  (function loop(){ px+=(cx-px)*.12; py+=(cy-py)*.12;
-    if(cfOn) cf.style.transform=`translate(${px}px,${py}px) scale(1) rotate(3deg)`;
-    requestAnimationFrame(loop); })();
+$$('#dlist .d-row').forEach(r=>{
+r.addEventListener('mouseenter',()=>{
+if(r.dataset.cover){ cfImg.src=r.dataset.cover; cf.classList.add('show'); cfOn=true; }
+});
+r.addEventListener('mouseleave',()=>{ cf.classList.remove('show'); cfOn=false; });
+});
+addEventListener('mousemove', e=>{ cx=e.clientX+24; cy=e.clientY-90; }, {passive:true});
+(function loop(){ px+=(cx-px)*.12; py+=(cy-py)*.12;
+if(cfOn) cf.style.transform=translate(${px}px,${py}px) scale(1) rotate(3deg);
+requestAnimationFrame(loop); })();
 }
-
 /* ================= CUSTOM CURSOR ================= */
 if(!TOUCH && !RM){
-  const dot=$('.cur-dot'), ring=$('.cur-ring');
-  let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my, rx2=mx, ry2=my;
-  addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; }, {passive:true});
-  (function cl(){ rx+=(mx-rx)*.35; ry+=(my-ry)*.35; rx2+=(mx-rx2)*.14; ry2+=(my-ry2)*.14;
-    dot.style.transform=`translate(${rx-3.5}px,${ry-3.5}px)`;
-    ring.style.transform=`translate(${rx2-ring.offsetWidth/2}px,${ry2-ring.offsetHeight/2}px)`;
-    requestAnimationFrame(cl); })();
-  document.addEventListener('mouseover', e=>ring.classList.toggle('big', !!e.target.closest('a,button,.d-row')));
-  document.addEventListener('mouseout', e=>{ if(e.target.closest('a,button,.d-row')) ring.classList.remove('big'); });
-}else{ $('.cur-dot').remove(); $('.cur-ring').remove(); }
+const dot=('.cur-dot'), ring=('.cur-ring');
+let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my, rx2=mx, ry2=my;
+addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; }, {passive:true});
+(function cl(){ rx+=(mx-rx)*.35; ry+=(my-ry)*.35; rx2+=(mx-rx2)*.14; ry2+=(my-ry2)*.14;
+dot.style.transform=translate(${rx-3.5}px,${ry-3.5}px);
+ring.style.transform=translate(${rx2-ring.offsetWidth/2}px,${ry2-ring.offsetHeight/2}px);
+requestAnimationFrame(cl); })();
+document.addEventListener('mouseover', e=>ring.classList.toggle('big', !!e.target.closest('a,button,.d-row')));
+document.addEventListener('mouseout', e=>{ if(e.target.closest('a,button,.d-row')) ring.classList.remove('big'); });
+}else{ ('.cur-dot').remove();('.cur-ring').remove(); }
 </script>
-
 </body>
 </html>
+ 
